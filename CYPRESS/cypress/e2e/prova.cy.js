@@ -20,6 +20,20 @@ describe('Teste adicionando produtos no carrinho', () => {
   })
 })
 
+describe('Teste finalizando a compra', () => {
+  it('Testando finalizar uma compra com sucesso', () => {
+    criaUser()
+    cy.get('[data-test="add-to-cart-sauce-labs-backpack"]').click()
+    cy.get('[data-test="shopping-cart-link"]').click()
+    cy.get('[data-test="checkout"]').click()
+    cy.get('[data-test="firstName"]').type('John')
+    cy.get('[data-test="lastName"]').type('Doe')
+    cy.get('[data-test="postalCode"]').type('12345')
+    cy.get('[data-test="continue"]').click()
+    cy.get('[data-test="finish"]').click()
+    cy.get('.complete-header').should('contain.text', 'THANK YOU FOR YOUR ORDER')
+  })
+})
 
 function criaUser(){
   cy.visit('https://www.saucedemo.com')
