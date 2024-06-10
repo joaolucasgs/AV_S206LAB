@@ -1,13 +1,35 @@
 {
 	"info": {
-		"_postman_id": "f9e8b695-9ee7-4c94-b2a2-43a567471bfe",
+		"_postman_id": "128b81b2-d5cf-4d80-8ce8-5eda24abf3b3",
 		"name": "PROVA LAB",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "30772518"
+		"_exporter_id": "14825127"
 	},
 	"item": [
 		{
 			"name": "Cenário 1: Teste positivo de criação de um novo usuário (POST)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Created successfully\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Returned right values\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.name).to.eql(\"Diego Lucio\");",
+							"    pm.expect(jsonData.email).to.eql(\"diegolucio@example.com\");",
+							"    pm.expect(jsonData.gender).to.eql(\"male\");",
+							"    pm.expect(jsonData.status).to.eql(\"active\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -23,7 +45,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"name\": \"Joao Lucas\",\r\n  \"email\": \"joaolucas@example.com\",\r\n  \"gender\": \"male\",\r\n  \"status\": \"active\"\r\n}",
+					"raw": "{\r\n  \"name\": \"Diego Lucio\",\r\n  \"email\": \"diegolucio@example.com\",\r\n  \"gender\": \"male\",\r\n  \"status\": \"active\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -49,6 +71,26 @@
 		},
 		{
 			"name": "Cenário 2: Teste negativo de criação de usuário com email inválido (POST)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Returned status code 422\", function () {",
+							"    pm.response.to.have.status(422);",
+							"});",
+							"",
+							"pm.test(\"Returned right field and message\", function () {",
+							"    var jsonData = pm.response.json()[0];",
+							"    pm.expect(jsonData.field).to.eql(\"email\");",
+							"    pm.expect(jsonData.message).to.eql(\"is invalid\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -90,6 +132,35 @@
 		},
 		{
 			"name": "Cenário 3: Teste positivo de listagem de todos os usuários (GET)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Returned all users\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.length).to.eql(10);",
+							"});",
+							"",
+							"pm.test(\"User has all fields\", function () {",
+							"    var jsonData = pm.response.json()[0];",
+							"    pm.expect(jsonData.id).to.not.equal(undefined);",
+							"    pm.expect(jsonData.name).to.not.equal(undefined);",
+							"    pm.expect(jsonData.email).to.not.equal(undefined);",
+							"    pm.expect(jsonData.gender).to.not.equal(undefined);",
+							"    pm.expect(jsonData.status).to.not.equal(undefined);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -112,6 +183,29 @@
 		},
 		{
 			"name": "Cenário 4: Teste positivo de obtenção de um usuário específico (GET)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"User has right values\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.id).to.eql(6945173);",
+							"    pm.expect(jsonData.name).to.eql(\"Annapurna Khatri I\");",
+							"    pm.expect(jsonData.email).to.eql(\"annapurna_i_khatri@bayer.test\");",
+							"    pm.expect(jsonData.gender).to.eql(\"female\");",
+							"    pm.expect(jsonData.status).to.eql(\"inactive\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -135,6 +229,25 @@
 		},
 		{
 			"name": "Cenário 5: Teste negativo de deleção de um usuário inexistente (DELETE)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Returned right status code\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Returned right message\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.message).to.eql(\"Resource not found\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"auth": {
 					"type": "bearer",
