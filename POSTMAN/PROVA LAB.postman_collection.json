@@ -19,8 +19,8 @@
 							"",
 							"pm.test(\"Returned right values\", function () {",
 							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData.name).to.eql(\"Diego Lucio\");",
-							"    pm.expect(jsonData.email).to.eql(\"diegolucio@example.com\");",
+							"    pm.expect(jsonData.name).to.eql(\"Gabriel Gemelle\");",
+							"    pm.expect(jsonData.email).to.eql(\"gabrielgemelle@example.com\");",
 							"    pm.expect(jsonData.gender).to.eql(\"male\");",
 							"    pm.expect(jsonData.status).to.eql(\"active\");",
 							"});"
@@ -45,7 +45,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"name\": \"Diego Lucio\",\r\n  \"email\": \"diegolucio@example.com\",\r\n  \"gender\": \"male\",\r\n  \"status\": \"active\"\r\n}",
+					"raw": "{\r\n  \"name\": \"Gabriel Gemelle\",\r\n  \"email\": \"gabrielgemelle@example.com\",\r\n  \"gender\": \"male\",\r\n  \"status\": \"active\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
