@@ -1,7 +1,14 @@
 /// <reference = cypress>
 
-
 describe('Teste logando no site', () => {
+  it('Testando login com falha', () => {
+    cy.visit('https://www.saucedemo.com')
+    cy.get('[data-test="username"]').type('visual_user')
+    cy.get('[data-test="password"]').type('wrong_password')
+    cy.get('[data-test="login-button"]').click()
+    cy.get('[data-test="error"]').should('contain.text', 'Epic sadface: Username and password do not match any user in this service')
+  })
+
   it('Testando login com sucesso', () => {
     cy.visit('https://www.saucedemo.com')
     cy.get('[data-test="username"]').type('visual_user')
