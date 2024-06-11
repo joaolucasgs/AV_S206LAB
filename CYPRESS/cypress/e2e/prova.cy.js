@@ -31,7 +31,7 @@ describe('Teste finalizando a compra', () => {
     cy.get('[data-test="postalCode"]').type('12345')
     cy.get('[data-test="continue"]').click()
     cy.get('[data-test="finish"]').click()
-    cy.get('.complete-header').should('contain.text', 'THANK YOU FOR YOUR ORDER')
+    cy.get('.complete-header').should('contain.text', 'Thank you for your order!')
   })
 })
 
